@@ -1,0 +1,30 @@
+package basic;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class SelectDropDown {
+	WebDriver driver;
+	public static void main (String [] args) {
+		
+		
+	}
+	
+	
+	public void setup() {
+		
+		
+		 driver = new ChromeDriver();
+		 driver.get("https://www.hyrtutorials.com/p/html-dropdown-elements-practice.html");
+		 driver.manage().window().maximize();
+	}
+	
+	public void selectWithValue(){
+		
+		Webdriver.findElement(By.xpath("//select[@id='course']"));
+		
+	}
+	
+
+}

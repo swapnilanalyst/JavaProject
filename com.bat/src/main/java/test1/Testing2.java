@@ -1,0 +1,36 @@
+package test1;
+
+
+public class Testing2 {
+	
+	public static void main (String[]arg) {
+		
+		Testing2 obj2 = new Testing2();
+		
+		test2.Testing2 obj = new test2.Testing2();
+		obj.setup();
+		obj.openLoginPage();
+		obj.verifyLogo();
+		obj.userName();
+		obj.pass();
+		obj.signIn();
+		
+		
+		
+	}
+	
+	
+	public void login() {
+		
+		System.out.println("login Done");
+	}
+	
+	public void dashboard() {
+		
+	    System.out.println("Dashboard");
+		
+	}
+	
+	
+
+}

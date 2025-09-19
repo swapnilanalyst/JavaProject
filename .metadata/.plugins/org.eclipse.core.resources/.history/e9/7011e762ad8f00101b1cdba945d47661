@@ -1,0 +1,29 @@
+package test1;
+
+import test2.Testing2;
+
+public class Testing2 {
+	
+	public static void main (String[]arg) {
+		
+		Testing2 obj = new Testing2();
+		test2.Testing2 obj2 = new .test2.Testing2();
+		
+		
+	}
+	
+	
+	public void login() {
+		
+		System.out.println("login Done");
+	}
+	
+	public void dashboard() {
+		
+	    System.out.println("Dashboard");
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,40 @@
+package javaBasic;
+
+public class LoopQuestions {
+
+	public static void main(String[] args) {
+		
+		//Question: Ek array hai [10, 20, 30, 40, 50]. Sab numbers print karo using for-each loop.
+		
+		int [] numbers = {10, 20, 30, 40, 50};
+		
+		for (int i: numbers) {
+			
+			System.out.println(i);
+		}
+		
+		
+		//Question: Ek string array hai {"Java", "Selenium", "Python"}. Har language print karo.
+		
+		String []  lang = {"Java", "Selenium", "Python"};
+		for(String s : lang) {
+			System.out.println(s);
+			
+		}
+		
+		
+		//Question: Ek array hai [5, 10, 15, 20]. Iska total sum nikalna hai using for-each loop.
+		
+		int [] nums = {5, 10, 15, 20};
+		int sum =0;
+		
+		for (int n : nums) {
+			
+			sum = sum+n;
+			
+		}
+		System.out.println(sum);
+	}
+	
+
+}

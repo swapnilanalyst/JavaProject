@@ -1,0 +1,13 @@
+package javaBasic;
+
+public class LoopQuestions {
+
+	public static void main(String[] args) {
+		
+		//Question: Ek array hai [10, 20, 30, 40, 50]. Sab numbers print karo using for-each loop.
+		
+
+	}
+	
+
+}

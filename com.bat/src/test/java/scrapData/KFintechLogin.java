@@ -1,15 +1,14 @@
 package scrapData;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
-import utils.OCRUtil;
-
-import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 //import org.apache.commons.io.FileUtils;
 
 public class KFintechLogin {
@@ -51,24 +50,35 @@ public class KFintechLogin {
 
         // Find the CAPTCHA input box and enter the text
         WebElement captchaInput = driver.findElement(By.xpath("//input[@name='txtcapthca$txtcptcha']"));
-        captchaInput.sendKeys(captchaText);
         
-        		driver.wait(5000);
-        		
-       WebElement signIn= driver.findElement(By.xpath("//input[@type='submit']"));
-        signIn.click();
+        Actions a= new Actions(driver);
         
-        driver.wait(3000);
-
-        // Wait for dashboard or error
-        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait2.until(ExpectedConditions.or(
-            ExpectedConditions.urlContains("dashboard"),
-            ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(),'Captcha')]"))
-        ));
+//        a.moveToElement(captchaInput).perform();
+        
+        a.contextClick(captchaInput).perform();
         
         
-        driver.quit();
+        
+        
+        
+//        captchaInput.sendKeys(captchaText);
+//        
+//        		driver.wait(5000);
+//        		
+//       WebElement signIn= driver.findElement(By.xpath("//input[@type='submit']"));
+//        signIn.click();
+//        
+//        driver.wait(3000);
+//
+//        // Wait for dashboard or error
+//        WebDriverWait wait2 = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        wait2.until(ExpectedConditions.or(
+//            ExpectedConditions.urlContains("dashboard"),
+//            ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(),'Captcha')]"))
+//        ));
+//        
+//        
+//        driver.quit();
 
 //        Assert.assertTrue(driver.getPageSource().contains("Dashboard") 
 //                || !driver.findElements(By.xpath("//div[contains(text(),'Captcha')]")).isEmpty());

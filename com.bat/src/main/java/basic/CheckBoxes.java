@@ -1,44 +1,48 @@
 package basic;
 
-import java.time.Duration;
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import utils.Helper;
 
 public class CheckBoxes {
-	
+
+	Helper h = new Helper();
 
 	public static void main(String[] args) {
-	
-				WebDriver driver = new ChromeDriver();
-				driver.get("https://www.hyrtutorials.com/p/basic-controls.html");
-				driver.manage().window().maximize();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+		CheckBoxes cb = new CheckBoxes();
+		cb.checkbox();
+
+	}
+
+	public void checkbox() {
+
+		h.setup("https://www.hyrtutorials.com/p/basic-controls.html");
+
+		List<WebElement> checkBoxesList = h.getElementsByXPath("//input[@type='checkbox']");
+
+		for (WebElement ele : checkBoxesList) {
+
+			System.out.println(ele);
+
+//					String id= ele.getAttribute("id");
+//					
+//					if(id.equals("englishchbx") || id.equals("chinesechbx") || id.equals("frenchchbx")) {
+//						
+//						ele.click();
+
+			if (!ele.isSelected()) {
+				ele.click();
 				
-				List<WebElement> checkBoxes =driver.findElements(By.xpath("//input[@type='checkbox']"));
-				
-				for(WebElement ele : checkBoxes) {
-					
-					System.out.println(ele);
-					
-					String id= ele.getAttribute("id");
-					
-					if(id.equals("englishchbx") || id.equals("chinesechbx") || id.equals("frenchchbx")) {
-						
-						ele.click();
-						
-						
-					}
-				}
-				
+
+			}
+		}
+
 //				/ele.isDisplayed();
 //				ele.isSelected();
 //				ele.isEnabled();
-		
-
 	}
 
 }

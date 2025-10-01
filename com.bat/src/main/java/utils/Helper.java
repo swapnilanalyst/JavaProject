@@ -67,19 +67,17 @@ public class Helper {
 	}
 
 	public void windowHandle(WebElement ele) {
-		
-		String parentID =driver.getWindowHandle();
+
+		String parentID = driver.getWindowHandle();
 		System.out.println("Parent Window: " + parentID);
 		ele.click();
-		
+
 		Set<String> allWindowIDs = driver.getWindowHandles();
-		
 
 		for (String a : allWindowIDs) {
 			System.out.println("TabIDs: " + a);
 			if (!parentID.equals(a)) {
 				driver.switchTo().window(a);
-				
 
 			}
 		}
@@ -94,6 +92,15 @@ public class Helper {
 			}
 			driver.quit(); // Properly close the session
 		}
+	}
+
+	public void frameSwitch(String id) {
+
+		driver.switchTo().frame(id);
+	}
+
+	public void switchToMainScreen() {
+		driver.switchTo().defaultContent();
 	}
 
 }

@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -51,7 +55,6 @@ public class Helper {
 
 	public void bootStrapDropDown(List<WebElement> dropdwonlist, String text) {
 
-//			List<WebElement>options= driver.findElements(By.xpath("//ul[@class='dropdown-menu']/child::li/a"));
 		System.out.println("BootStrap Dropdown List Size:" + dropdwonlist.size() + "  List Name:- ");
 
 		for (WebElement ele : dropdwonlist) {
@@ -102,5 +105,59 @@ public class Helper {
 	public void switchToMainScreen() {
 		driver.switchTo().defaultContent();
 	}
-
+	
+	public String getTitleByJS() {
+		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		String title = (String) js.executeScript("return document.title;");
+		System.out.println("Title: " + title);
+		return title;
+	}
+	
+	public String getPageInnerTextByJS() {
+		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		String text = (String) js.executeScript("return document.documentElement.innerText;");
+		System.out.println("Page InnerText: " + text);
+		return text;
+	}
+	
+	public String getElementInnerTextByJS(WebElement ele) {
+		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		String text =(String) js.executeScript("return arguments[0].innerText;", ele);
+		System.out.println("Element Inner Text: " + text);
+		return text;
+	}
+	
+	public void clickElementByJS(WebElement ele) {
+		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();", ele);
+	}
+	
+	public void setValueByJS(WebElement ele, String value) {
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+	    js.executeScript("arguments[0].setAttribute('value', arguments[1]);", ele, value);
+	}
+	
+	public void scrollIntoViewByJS(WebElement ele) {
+		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollInTOView(true);", ele);
+		
+	}
+	
+	public void highlightElementByJS(WebElement ele, String style) {
+		
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].setAttribut('style',arguments[1]);", ele, style);
+	}
+	
+	public void explicitWait(WebElement ele, int seconds) {
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		wait.until(ExpectedConditions.visibilityOf(ele));
+	}
+	
 }

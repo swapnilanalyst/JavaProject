@@ -25,7 +25,7 @@ public class FrameClass {
 		WebElement name= h.getElementByXPath("//input[@id='name']");
 		name.sendKeys("Hello");
 		
-		h.frameSwitch("frm2");
+		h.closeBrowser();
 
 	}
 

@@ -13,7 +13,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class javaScriptExecutorClass {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		
 		WebDriverManager.chromedriver().setup();
@@ -33,14 +33,15 @@ public class javaScriptExecutorClass {
 		WebElement userName = driver.findElement(By.xpath("//input[@name='user-name']"));
 //		userName.clear();
 		
-		js.executeScript("arguments[0].setAttribute('value', 'redv@mailinator.com')", userName);
+		js.executeScript("arguments[0].value='test@gmail.com';", userName);;
 		
 		
 		WebElement password  = driver.findElement(By.xpath("//input[@name='password']"));
 //		password.clear();
 		
-		js.executeScript("arguments[0].setAttribute('value', 'Redv@123')", password);
+		js.executeScript("arguments[0].value='Redv@g123';", password);;
 		
+		Thread.sleep(2000);
 		
 		WebElement signInBtn = driver.findElement(By.xpath("//input[@type='submit']"));
 		

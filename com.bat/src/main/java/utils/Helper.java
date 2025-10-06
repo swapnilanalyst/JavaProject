@@ -138,7 +138,7 @@ public class Helper {
 	
 	public void setValueByJS(WebElement ele, String value) {
 	    JavascriptExecutor js = (JavascriptExecutor) driver;
-	    js.executeScript("arguments[0].setAttribute('value', arguments[1]);", ele, value);
+	    js.executeScript("arguments[0].value= arguments[1]);", ele, value);
 	}
 	
 	public void scrollIntoViewByJS(WebElement ele) {

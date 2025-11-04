@@ -2,9 +2,18 @@ package javaBacis;
 
 public class C {
 	
-	public void test() {
+	public static void main(String[] args) 
 		
-		System.out.println("test new");
+	{
+		
+	
+		String a  = "test";
+		String b= "test";
+		
+		System.out.println(a==b);
+		System.out.println(a.equals(b));
 	}
+	
+	
 
 }

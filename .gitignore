@@ -1,0 +1,26 @@
+# Eclipse specific
+.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+.localhistory/
+.loadpath
+recovery/
+*.launch
+# Java specific
+*.class
+*.war
+*.ear
+# Gradle
+.gradle/
+build/
+# Maven
+target/
+# Logs
+*.log
+# OS generated files
+.DS_Store
+Thumbs.db

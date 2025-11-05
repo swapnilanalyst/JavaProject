@@ -16,4 +16,11 @@ public class TestA extends C implements Intrface {
 		
 	}
 
+
+	@Override
+	public void test() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

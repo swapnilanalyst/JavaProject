@@ -1,15 +1,20 @@
 package utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -106,12 +111,18 @@ public class Helper {
 		driver.switchTo().defaultContent();
 	}
 	
-	public String getTitleByJS() {
+	public String gettTitle() {
+		try {
+			return driver.getTitle();
+			
+			
+		}catch(Exception e) {
+			
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			return (String) js.executeScript("return document.title;");
+			
+		}
 		
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		String title = (String) js.executeScript("return document.title;");
-		System.out.println("Title: " + title);
-		return title;
 	}
 	
 	public String getPageInnerTextByJS() {
@@ -130,15 +141,26 @@ public class Helper {
 		return text;
 	}
 	
-	public void clickElementByJS(WebElement ele) {
+	public void clickOnElement(WebElement ele) {
+		try {
+			
+			ele.click();
+		} catch (Exception e) {
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", ele);
+		}
 		
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", ele);
 	}
-	
-	public void setValueByJS(WebElement ele, String value) {
-	    JavascriptExecutor js = (JavascriptExecutor) driver;
-	    js.executeScript("arguments[0].value= arguments[1]);", ele, value);
+	public void clearAndSendKeys(WebElement ele, String value) {
+		try {
+			
+			ele.clear();
+			ele.sendKeys(value);
+		} catch (Exception e) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+		    js.executeScript("arguments[0].value= arguments[1]);", ele, value);
+				
+	}
 	}
 	
 	public void scrollIntoViewByJS(WebElement ele) {
@@ -154,10 +176,60 @@ public class Helper {
 		js.executeScript("arguments[0].setAttribut('style',arguments[1]);", ele, style);
 	}
 	
-	public void explicitWait(WebElement ele, int seconds) {
+	public WebElement explicitWait(WebElement ele, long seconds) {
 		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
-		wait.until(ExpectedConditions.visibilityOf(ele));
+		return wait.until(ExpectedConditions.visibilityOf(ele));
+	}
+	public Alert waitForAlertPresnt(long seconds) {
+			
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		return wait.until(ExpectedConditions.alertIsPresent());
+	}
+	
+	
+	public Boolean  waitForAlertPresnt(WebElement ele, String attribute, String value, long seconds) {
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		return  wait.until(ExpectedConditions.attributeContains(ele, attribute, value));
+	}
+	public WebElement  elementToBeClickable(WebElement ele, long seconds) {
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+		return  wait.until(ExpectedConditions.elementToBeClickable(ele));
+	}
+	
+	public void takeScreenShot(String ssName) throws IOException {
+		
+		TakesScreenshot ts = (TakesScreenshot)driver;
+		File src= ts.getScreenshotAs(OutputType.FILE);
+		FileHandler.copy(src, new File(System.getProperty("user.dir")+"/Screenshots/test"+ssName+".png"));
+		
+	}
+	
+	public void switchToWindowByTitle(WebElement ele, String expectedTitle) {
+		
+		String parentID = driver.getWindowHandle();
+		System.out.println("Parent Window: " + parentID);
+		ele.click();
+		
+		Set<String> allWindowIds= driver.getWindowHandles();
+		System.out.println("Tab ID: " + allWindowIds);
+		for(String id : allWindowIds) {
+			System.out.println("Ids" +id);
+			if (!id.equals(parentID)) {  
+			driver.switchTo().window(id);
+			
+			String title= gettTitle();
+			
+			if(title.contains(expectedTitle)) {
+				System.out.println("Switched to window: " + expectedTitle);
+	            return; 
+				
+			}
+			
+			}
+		}
 	}
 	
 }
